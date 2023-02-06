@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import * as monaco from 'monaco-editor-core';
+import * as monaco from 'monaco-editor-core/esm/vs/editor/editor.api.js';
 import * as client from './client';
 
 
