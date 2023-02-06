@@ -5,6 +5,7 @@ const isWsl = require('is-wsl');
 const path = require('path');
 const webpack = require('webpack');
 const resolve = require('resolve');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -359,6 +360,7 @@ module.exports = function(webpackEnv) {
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: paths.appSrc,
+              // exclude: 'node_modules',
               loader: require.resolve('babel-loader'),
               options: {
                 customize: require.resolve(
@@ -367,6 +369,7 @@ module.exports = function(webpackEnv) {
                 
                 plugins: [
                   [
+                    // new MonacoWebpackPlugin(),
                     require.resolve('babel-plugin-named-asset-import'),
                     {
                       loaderMap: {
@@ -636,6 +639,7 @@ module.exports = function(webpackEnv) {
           // The formatter is invoked directly in WebpackDevServerUtils during development
           formatter: isEnvProduction ? typescriptFormatter : undefined,
         }),
+      // new MonacoWebpackPlugin(),
     ].filter(Boolean),
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
